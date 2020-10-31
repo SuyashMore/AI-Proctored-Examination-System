@@ -11,7 +11,7 @@ import reference_world as world
 PREDICTOR_PATH = os.path.join("shape_predictor_68_face_landmarks.dat")
 
 if not os.path.isfile(PREDICTOR_PATH):
-    print("[ERROR] USE models/downloader.sh to download the predictor")
+    print("[ERROR] USE /downloader.sh to download the predictor")
     sys.exit()
 
 def main(source=0):
