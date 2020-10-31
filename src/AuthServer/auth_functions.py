@@ -20,30 +20,37 @@ class authFunctions:
 
         return self.db.insertEntry("student",jsonData)
 
-    def addAdmin(self,id,name,email,photoURL,password):
+    def addAdmin(self,id,name,email,password):
         jsonData = {'admin_id':id,
                     'name':name,
                     'email':email,
                     'password':password,
-                    'tests_created':None}
+                    'tests_created':{'TestAmt':0}}
 
         return self.db.insertEntry("admin",jsonData)
 
-    def loginStudent(self,email,password):
-        query = "select email,password from student where email="+email
-        studentData = runQuery(self,query)
+    def verifyStudent(self,email,password):
+        query = "select email,password from student where email='"+email+"'"
+        studentData = self.db.runQuery(query)
+        if len(studentData)==0:
+            return False
+        
+        studentData=studentData[0]
+        if studentData['password']==password:
+            return True
+        return False
 
-        # if(studentData['password']==password)
-        #     return studentData['student_id']
+    def verifyAdmin(self,email,password):
+        query = "select email,password from admin where email='"+email+"'"
+        adminData = self.db.runQuery(query)
+        if len(adminData)==0:
+            return False
+        
+        adminData=adminData[0]
+        if adminData['password']==password:
+            return True
+        return False
 
-        return None
-
-    def loginAdmin(self,email,password):
-        query = "select email,password from admin where email="+email
-        adminData = runQuery(self,query)
-        # if(adminData['password']==password)
-        #     return adminData['student_id']
-        return None
     
     def validateStudent(self,student_id,photo_url):
         return True

@@ -28,12 +28,12 @@ class dbManager:
         request = GetRequest().set_table_name(table)
         request.set_key(jsonKey)
         result = self.handle.get(request)
-        return result
+        return result.get_result()
 
     def runQuery(self,query):
         request = QueryRequest().set_statement(query)
         result = self.handle.query(request)
-        return result
+        return result.get_results()
 
     def deleteEntry(self,table,jsonKey):
         request = DeleteRequest().set_table_name(table)
