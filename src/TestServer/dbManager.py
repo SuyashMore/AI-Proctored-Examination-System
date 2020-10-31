@@ -27,12 +27,12 @@ class dbManager:
         request = GetRequest().set_table_name(table)
         request.set_key(jsonKey)
         result = self.handle.get(request)
-        return result
+        return result.get_results()
 
     def runQuery(self,query):
         request = QueryRequest().set_statement(query)
         result = self.handle.query(request)
-        return result
+        return result.get_results()
 
     def deleteEntry(self,table,jsonKey):
         request = DeleteRequest().set_table_name(table)
@@ -40,17 +40,18 @@ class dbManager:
         result = self.handle.delete(request)
         return result
 
-
-
     def close(self):
         self.handle.close()
 
 if __name__=="__main__":
     db = dbManager()
     db.connect()
-    result = db.runQuery('Select * from student')
-    print(f"Result:{result}")
-    result = db.getEntry('student',{'student_id':100})
-    print(f"Result:{result}")
+    jsonData = {'student_id':2,
+                    'name':"sss",
+                    'email':"ggg",
+                    'photo_url':"ppp",
+                    'password':"plls",
+                    'tests_given':{'test1':'hello World'}}
+    result = db.insertEntry('student',jsonData)
     db.close()
 

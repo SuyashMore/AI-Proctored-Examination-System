@@ -119,3 +119,4 @@ api.add_resource(validateStudent, '/validateStudent')
 
 if __name__ == "__main__":
     app.run(debug=True)
+
