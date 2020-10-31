@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Create Test</h1>
+    <div id="selector">
+      <h3>Select type of question</h3>
+      <button style="display: inline-block" id="mcq">MCQ</button>
+      <button style="display: inline-block" id="subjective">Subjective</button>
+      <div id="enterquestion"></div>
+
+      <div id="mcqform" style="display: none">
+        <input
+          required
+          type="text"
+          placeholder="Enter Question"
+          name="MCQquestion"
+          id="mcqquestion"
+          size="80"
+        />
+        <br />
+        <br />
+        <input
+          required
+          type="text"
+          placeholder="option 1"
+          name="op1"
+          id="op1"
+          size="50"
+        />
+        <input
+          required
+          type="text"
+          placeholder="option 2"
+          name="op2"
+          id="op2"
+          size="50"
+        />
+        <br />
+        <br />
+        <input
+          required
+          type="text"
+          placeholder="option 3"
+          name="op3"
+          id="op3"
+          size="50"
+        />
+        <input
+          required
+          type="text"
+          placeholder="option 4"
+          name="op4"
+          id="op4"
+          size="50"
+        />
+        <br />
+        <br />
+        <input
+          required
+          type="number"
+          placeholder="Enter correct option no."
+          name="answer"
+          id="answer"
+        />
+        <br />
+        <br />
+        <input
+          type="submit"
+          value="Submit Question"
+          name="Submit Question"
+          id="submitmcq"
+        />
+      </div>
+
+      <div id="subform" style="display: none">
+        <input
+          type="text"
+          name="question"
+          size="80"
+          id="subquestion"
+          placeholder="Enter Question"
+        />
+        <input
+          type="submit"
+          value="Submit Question"
+          name="Submit Question"
+          id="submitsub"
+        />
+      </div>
+      <button id="submittest">Submit Test</button>
+    </div>
+    <div id="arrayToNode"></div>
+
+    <!-- <button id="displayquesbtn">display questions</button> -->
+    <!-- <div id="submitmcq">dfdf</div> -->
+    <div id="displayques"></div>
+    <script>
+      document.getElementById("mcq").addEventListener("click", function () {
+        //   document.getElementById("enterquestion").innerHTML = `
+        //   `;
+        document.getElementById("mcqform").style.display = "block";
+        document.getElementById("subform").style.display = "none";
+        document.getElementById("displayques").style.display = "none";
+      });
+
+      document
+        .getElementById("subjective")
+        .addEventListener("click", function () {
+          //   document.getElementById("enterquestion").innerHTML = `
+          //   `;
+          document.getElementById("subform").style.display = "block";
+          document.getElementById("mcqform").style.display = "none";
+          document.getElementById("displayques").style.display = "none";
+        });
+
+      let questions = [];
+      function submitQuestion(type) {
+        let question = {};
+        question.type = type;
+      }
+
+      document
+        .getElementById("submitmcq")
+        .addEventListener("click", function () {
+          let question = {};
+          question.type = "mcq";
+          question.question = document.getElementById("mcqquestion").value;
+          question.op1 = document.getElementById("op1").value;
+          question.op2 = document.getElementById("op2").value;
+          question.op3 = document.getElementById("op3").value;
+          question.op4 = document.getElementById("op4").value;
+          question.ans = document.getElementById("answer").value;
+          //   console.log(question.question);
+          questions.push(question);
+          document.getElementById("mcqform").style.display = "none";
+        });
+
+      document
+        .getElementById("submitsub")
+        .addEventListener("click", function () {
+          let question = {};
+          question.type = "subjective";
+          question.question = document.getElementById("subquestion").value;
+          //   console.log(question.question);
+          questions.push(question);
+          document.getElementById("subform").style.display = "none";
+        });
+
+      function displayQuestionsFunction(check) {
+        console.log(questions);
+        let questionsArr = ``;
+        for (let i = 0; i < questions.length; i++) {
+          if (questions[i].type === "mcq") {
+            questionsArr += `Question ${i + 1}: <br>`;
+            questionsArr += questions[i].question;
+            questionsArr += `<br>`;
+            questionsArr += `Options: <br>`;
+            questionsArr += questions[i].op1;
+            questionsArr += `<br>`;
+            questionsArr += questions[i].op2;
+            questionsArr += `<br>`;
+            questionsArr += questions[i].op3;
+            questionsArr += `<br>`;
+            questionsArr += questions[i].op4;
+            questionsArr += `<br>`;
+            questionsArr += `Answer: <br>`;
+            questionsArr += questions[i].ans;
+            questionsArr += `<br>`;
+          } else {
+            questionsArr += `Question: ${i + 1} <br>`;
+            questionsArr += questions[i].question;
+            questionsArr += `<br>`;
+          }
+        }
+        document.getElementById("displayques").style.display = "block";
+        document.getElementById("displayques").innerHTML = questionsArr;
+      }
+
+      document
+        .getElementById("displayquesbtn")
+        .addEventListener("click", displayQuestionsFunction);
+
+      document
+        .getElementById("submittest")
+        .addEventListener("click", function () {
+          document.getElementById("arrayToNode").innerHTML =
+            "<% questionsOnNode = " + questions + "%>";
+          displayQuestionsFunction();
+        });
+    </script>
+    <!-- <script src="createTest.js"></script> -->
+  </body>
+</html>

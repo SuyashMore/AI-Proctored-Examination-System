@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>All Tests:</h1>
+    <% tests.forEach(function(test){ %>
+    <form action="/student/takeTest" method="POST">
+      <%= test.id %>
+      <br />
+      <input
+        type="text"
+        style="display: none"
+        name="testID"
+        value="<%= test.id %>"
+        id=""
+      />
+      <input
+        type="text"
+        style="display: none"
+        name="email"
+        value="<%= email %>"
+        id=""
+      />
+      <input type="submit" value="Take Test" name="" id="" />
+    </form>
+    <% }) %>
+  </body>
+</html>

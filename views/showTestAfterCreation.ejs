@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Test ID: <%= test.id %></h1>
+    <% test.questions.forEach(function(question){ %> <% if(question.op1 ===
+    undefined){ %>
+    <h4>Question:</h4>
+    <h4><%= question.question %></h4>
+    <hr />
+    <% } else { %>
+    <h4>Question:</h4>
+    <h4><%= question.question %></h4>
+    <h5><%= question.op1 %></h5>
+    <h5><%= question.op2 %></h5>
+    <h5><%= question.op3 %></h5>
+    <h5><%= question.op4 %></h5>
+    <h5>Answer:</h5>
+    <h5><%= question.answer %></h5>
+    <hr />
+    <% } %> <% }) %>
+  </body>
+</html>

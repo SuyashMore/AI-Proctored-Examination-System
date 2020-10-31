@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="number" style="display: none;" value="<%= test.testDuration %>" name="testDuration" id="testDuration">
+  <h3 id="timer"></h3>
+  <form action="/student/submitTest" method="POST" id="testFormID">
+    <input style="display: none;" type="text" value="<%= email %>" name="email" id="">
+      <h3>Test: <%= test.id %></h3>
+      <input type="text" name="testID" value="<%= test.id %>" id="testID" style="display: none;">
+      <% for(var i=0 ; i < test.questions.length ; i++ ){ %>
+      <% if(test.questions[i].op1 === undefined){ %>
+      <h3>Question: <%= test.questions[i].question %></h3>
+      <textarea placeholder="Type ur answer here" name="<%= test.questions[i].ind %>" cols="150" rows="10"></textarea>
+      <% } else { %>
+      <h3>Question: <%= test.questions[i].question %></h3>
+      <h4>1. <%= test.questions[i].op1 %></h4>
+      <h4>2. <%= test.questions[i].op2 %></h4>
+      <h4>3. <%= test.questions[i].op3 %></h4>
+      <h4>4. <%= test.questions[i].op4 %></h4>
+      <input placeholder="Choose correct Option No." type="number" name="<%= test.questions[i].ind %>">
+      <% } %> 
+      <% } %>
+      <input type="submit" name="submit" value="End Test" id="endTestId">
+  </form>
+
+  <script>
+    var testDuration = document.getElementById('testDuration').value;
+    console.log(typeof testDuration);
+    testDuration = parseInt(testDuration);
+    var countdown = testDuration * 60 * 1000;
+    var timerId = setInterval(function(){
+      countdown -= 1000;
+      var min = Math.floor(countdown / (60 * 1000));
+      //var sec = Math.floor(countdown - (min * 60 * 1000));  // wrong
+      var sec = Math.floor((countdown - (min * 60 * 1000)) / 1000);  //correct
+
+      if (countdown <= 0) {
+        // document.getElementById('testFormID').submit();
+        document.getElementById('endTestId').click();
+        clearInterval(timerId);
+        //doSomething();
+      } else {
+        document.getElementById('timer').innerHTML = `Time Remaining: ${min} : ${sec}`;
+      }
+
+    }, 1000); //1000ms. = 1sec.
+  </script>
+</body>
+</html>
