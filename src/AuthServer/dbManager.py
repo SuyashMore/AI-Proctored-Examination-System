@@ -20,6 +20,7 @@ class dbManager:
     def insertEntry(self,table,jsonObj):
         request = PutRequest().set_table_name(table)
         request.set_value(jsonObj)
+        print(f"Insert Entry : {jsonObj}")
         result = self.handle.put(request)
         return result
 
@@ -48,9 +49,12 @@ class dbManager:
 if __name__=="__main__":
     db = dbManager()
     db.connect()
-    result = db.runQuery('Select * from student')
-    print(f"Result:{result}")
-    result = db.getEntry('student',{'student_id':100})
-    print(f"Result:{result}")
+    jsonData = {'student_id':2,
+                    'name':"sss",
+                    'email':"ggg",
+                    'photo_url':"ppp",
+                    'password':"plls",
+                    'tests_given':{'test1':'hello World'}}
+    result = db.insertEntry('student',jsonData)
     db.close()
 
