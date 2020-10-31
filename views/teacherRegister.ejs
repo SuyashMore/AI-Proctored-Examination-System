@@ -6,11 +6,26 @@
     <title>Teacher Register</title>
   </head>
   <body>
-    <form action="/teacher/register" method="POST">
-      <input type="text" name="name" />
-      <input type="email" name="email" />
-      <input type="password" name="password" />
-      <input type="submit" />
+    <h2>Admin Register</h2>
+    <form action="/teacher/login" method="POST">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter password">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <br>
+    <a style="text-decoration: none;" href="/teacher/register">Don't have an account, Register Here</a>
     </form>
+    <!-- <form action="/teacher/register" method="POST">
+      <input placeholder="Enter Name" type="text" name="name" />
+      <input placeholder="Enter Email" type="email" name="email" />
+      <input placeholder="Enter Password" type="password" name="password" />
+      <input type="submit" />
+    </form> -->
   </body>
 </html>

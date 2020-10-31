@@ -18,7 +18,7 @@ class AddStudent(Resource):
         self.parser.add_argument('photo_url',type=str,required=True,help="This field cannot be left blank.")
 
     def post(self):
-        print("Adding User Called")
+        # print("Adding User Called")
         headers: {"Accept": "application/json","Content-type": "application/json",}
         response = self.parser.parse_args()
         print(response)
@@ -57,6 +57,7 @@ class verifyStudent(Resource):
         print("Verify Student Called")
         headers: {"Accept": "application/json","Content-type": "application/json",}
         response = self.parser.parse_args()
+        print("Request Received !")
         print(response)
         loginDetailsCorrect = authFunc.verifyStudent(response['email'],
                                 response['password'])
@@ -118,5 +119,5 @@ api.add_resource(validateStudent, '/validateStudent')
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=300,debug=True)
 

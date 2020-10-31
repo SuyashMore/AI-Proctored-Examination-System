@@ -25,3 +25,9 @@ class testFunction:
 
         return result
 
+    def getAllTest(self):
+        query = 'select test_details from test'
+        result = self.db.runQuery(query)
+        return result
+
+

@@ -40,10 +40,23 @@ class GetTest(Resource):
 
         return result
 
+class GetAllTest(Resource):
+    def __init__(self):
+        self.parser = reqparse.RequestParser()
+        pass
+
+    def post(self):
+        print("get Test Called")
+        headers: {"Accept": "application/json","Content-type": "application/json",}
+        result = testFunc.getAllTest()
+
+        return result
+
 api.add_resource(CreateTest, '/createTest')
 api.add_resource(GetTest, '/getTest')
+api.add_resource(GetAllTest, '/getAllTest')
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=100,debug=True)
 

@@ -1,5 +1,8 @@
 const express = require("express");
+var request = require('request');
 const router = express.Router();
+var crypto = require('crypto');
+
 const publicDirPath = require("../public/toGetDir");
 let tests = require("./teacher").tests;
 
@@ -26,26 +29,48 @@ router.get("/register", (req, res) => {
 
 router.post("/login", (req, res) => {
   let found = -1;
-  for (let i = 0; i < studentCred.length; i++) {
-    if (studentCred[i].email === req.body.email) {
-      if (studentCred[i].password === req.body.password) found = i;
-      else found = -2;
-      break;
-    }
-  }
-  if (found === -1) {
-    res.send("Entered email is not registered");
-    return;
-  }
-  if (found === -2) {
-    res.send("Entered password is incorrect");
-    return;
-  }
-  //   res.redirect(`/student/${studentCred[found].email}`);
-  // res.json(studentCred[found]);
-  res.render("studentHome", {
-    email: req.body.email
-  });
+
+  let inputEmail = req.body.email;
+  let inputPassword = req.body.password;
+  inputPassword = crypto.createHash('md5').update(inputPassword).digest('hex');
+    
+
+    console.log(inputEmail);
+    console.log(inputPassword);
+    const options = {
+        url: 'http://127.0.0.1:300/' + 'verifyStudent',
+        json: true,
+        body: {
+            'email': inputEmail,
+            'password': inputPassword
+        }
+    };
+
+    request.post(options, (err, resp, body) => {
+        if (err) {
+            return console.log(err);
+        }
+        console.log(body);
+        if (body['verify'] == 'Success') {
+            found = 1;
+        }
+
+        if (found === -1) {
+            res.send("Invalid Email Password Combination");
+            return;
+        }
+
+        res.render("studentHome", {
+          email: req.body.email
+        });
+
+    });
+
+    //suyash.21.more@gmail.com
+    //pass1
+ 
+  
+  
 });
 
 router.get("/tp", (req, res) => {
@@ -54,19 +79,38 @@ router.get("/tp", (req, res) => {
 
 router.post("/register", (req, res) => {
   let found = false;
-  for (let i = 0; i < studentCred.length; i++) {
-    if (studentCred[i].email === req.body.email) {
-      found = true;
-      break;
+
+  let inputEmail = req.body.email;
+  let inputName = req.body.name;
+  let inputPassword = req.body.password;
+  inputPassword = crypto.createHash('md5').update(inputPassword).digest('hex');
+  let inputImage = req.body.photo;
+
+  console.log(inputEmail);
+  console.log(inputName);
+  console.log(inputPassword);
+  console.log(inputImage);
+
+  const options = {
+    url: 'http://127.0.0.1:300/' + 'addStudent',
+    json: true,
+    body: {
+      'name': inputName,  
+      'email': inputEmail,
+      'password': inputPassword,
+      'photo_url': inputImage
     }
-  }
-  if (found) {
-    res.send("Entered email is already registered");
-    return;
-  }
-  studentCred.push(req.body);
-  console.log(req.body);
+};
+
+request.post(options, (err, resp, body) => {
+    if (err) {
+        return console.log(err);
+    }
+    console.log(body);
+});
+
   res.redirect("/student/login");
+
 });
 
 router.get("/showStudents", (req, res) => {
@@ -80,37 +124,75 @@ router.get("/home", (req, res) => {
 
 // Show all tests to student
 router.post("/showAllTests", (req, res) => {
-  res.render("showAllTestsToStudent", {
-    tests,
-    email: req.body.email
+   const options = {
+    url: 'http://127.0.0.1:100/' + 'getAllTest'
+  };
+
+  request.post(options, (err, resp, body) => {
+      if (err) {
+          return console.log(err);
+      }
+      console.log("Database Data Retrived:")
+      body = JSON.parse(body);
+      console.log(body);
+      console.log(body.length);
+
+      for(let i=0;i<body.length;i++){
+          
+          console.log(body[i]['test_id']);
+          console.log("--------------------------");
+      }
+      tests = body;
+      console.log("Tests Before!:")
+      console.log(tests)
+      res.render("showAllTestsToStudent", {
+        tests,
+        email: "test@test.com"
+      });
   });
+
+
+  
 });
 
 // Give Test
 router.post("/takeTest", (req, res) => {
-  let test = null;
-  for (let i = 0; i < tests.length; i++) {
-    if (tests[i].id === req.body.testID) {
-      test = tests[i];
-      break;
-    }
-  }
-  // console.log(test);
+  console.log("Avail Tests")
+  console.log(tests)
+
+  let test = tests[0].test_details;
+
+  // console.log("Test ID Requested:");
+  // console.log(req.body.testID);
+  // for (let i = 0; i < tests.length; i++) {
+  //   if (parseInt(tests[i].id) === parseInt(req.body.testID)) {
+  //     test = tests[i];
+  //     break;
+  //   }
+  // }
+  // console.log("All Tests:")
+  // console.log(tests)
+  // console.log("Test is:")
+  // console.log(test)
+  console.log(JSON.stringify(test));
   res.render("takeTestByStudent", {
     test,
     email: req.body.email
   });
+  
 });
 
 // Route for accepting test responses from students
 router.post('/submitTest', (req, res) => {
-  let test = null;
-  for (let i = 0; i < tests.length; i++) {
-    if (tests[i].id === req.body.testID) {
-      test = tests[i];
-      break;
-    }
-  }
+  // let test = null;
+  // for (let i = 0; i < tests.length; i++) {
+  //   if (tests[i].id === req.body.testID) {
+  //     test = tests[i];
+  //     break;
+  //   }
+  // }
+
+  let test = tests[0].test_details;
   let responseOfStudent = {};
   responseOfStudent.testID = req.body.testID;
   responseOfStudent.studentEmail = req.body.email;
@@ -135,9 +217,34 @@ router.post('/submitTest', (req, res) => {
     qna.push(obj);
   }
   responseOfStudent.qna = qna;
+  console.log("Response of Student")
   console.log(responseOfStudent);
-  console.log(test);
-  return;
+
+
+  const options = {
+    url: 'http://127.0.0.1:200/' + 'scoreAndStore',
+    json: true,
+    body: {
+      'response': {
+        "testID" : responseOfStudent.testID,
+        "studentEmail" : responseOfStudent.studentEmail,
+        "qna" :responseOfStudent.qna
+      }
+    }
+};
+
+request.post(options, (err, resp, body) => {
+    if (err) {
+        return console.log(err);
+    }
+    console.log(body);
+    res.render("showAllTestsToStudent", {
+      tests,
+      email:responseOfStudent.studentEmail
+    });
+});
+
+
 })
 
 module.exports = router;

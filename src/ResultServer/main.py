@@ -2,6 +2,8 @@ from flask import Flask, request,jsonify,redirect, url_for,  make_response
 from flask_restful import Resource, Api, reqparse
 import os
 from dbManager import dbManager
+import random
+
 
 
 app = Flask(__name__)
@@ -10,20 +12,21 @@ app.config['SECRET_KEY']='mysecretkey'
 
 class getStudentResult(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument('student_id', type=str, required=True, help="This field cannot be left blank.")
+    parser.add_argument('studentEmail', type=str, required=True, help="This field cannot be left blank.")
     def __init__(self):
         db.connect()
   
     def post(self):
         print("post was called")
         headers: { "Accept": "application/json", "Content-type": "application/json",}
-        found =getStudentResult.parser.parse_args()["student_id"]
-        query = "SELECT * FROM result where student_id=" + found
+        found =getStudentResult.parser.parse_args()["studentEmail"]
+        query = "SELECT * FROM result where email='" + found+"'"
         result = db.runQuery(str(query))
         bigjson = []
         for r in result :
             jsondata = {
                 'student_id': r["student_id"], 
+                'email': r["email"],
                 'test_id': r["test_id"],
                 'mcq_score':r['mcq_score'],
                 'final_score':r['final_score'],
@@ -53,6 +56,7 @@ class getTestResult(Resource):
         for r in result :
             jsondata = {
                 'student_id': r["student_id"], 
+                'email':r["email"],
                 'test_id': r["test_id"],
                 'mcq_score':r['mcq_score'],
                 'final_score':r['final_score'],
@@ -69,7 +73,7 @@ class getTestResult(Resource):
 
 class getStudentResponse(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument('student_id', type=str, required=True, help="This field cannot be left blank.")
+    parser.add_argument('studentEmail', type=str, required=True, help="This field cannot be left blank.")
     parser.add_argument('test_id', type=str, required=True, help="This field cannot be left blank.")
     def __init__(self):
         db.connect()
@@ -77,14 +81,15 @@ class getStudentResponse(Resource):
     def post(self):
         print("post student response was called")
         headers: { "Accept": "application/json", "Content-type": "application/json",}
-        s_id = getStudentResponse.parser.parse_args()["student_id"]
+        s_email = getStudentResponse.parser.parse_args()["studentEmail"]
         t_id = getStudentResponse.parser.parse_args()["test_id"]
-        query = "SELECT * FROM result where test_id=" + t_id + " and student_id=" + s_id
+        query = "SELECT * FROM result where test_id=" + t_id + " and email='" + s_email+"'"
         result = db.runQuery(str(query))
         bigjson = []
         for r in result :
             jsondata = {
                 'student_id': r["student_id"], 
+                'email': r["email"],
                 'test_id': r["test_id"],
                 'mcq_score':r['mcq_score'],
                 'final_score':r['final_score'],
@@ -110,8 +115,9 @@ class scoreAndStore(Resource):
         headers: { "Accept": "application/json", "Content-type": "application/json",}
         response = scoreAndStore.parser.parse_args()["response"]
         print(type(response))
-        t_id = str(response["test_id"])
-        s_id = str(response["student_id"])
+        t_id = str(response["testID"])
+        email = str(response["studentEmail"])
+        s_id = random.randint(0,20000)
         mcq_score =0
         final_score=0
         generated=False
@@ -130,7 +136,8 @@ class scoreAndStore(Resource):
         print(answers)
         
         jsondata = {
-                'student_id': s_id, 
+                'student_id': s_id,
+                'email':email,
                 'test_id': t_id,
                 'mcq_score':mcq_score,
                 'final_score':final_score,
@@ -156,4 +163,79 @@ api.add_resource(scoreAndStore, '/scoreAndStore')
 
 if __name__ == "__main__":
     db = dbManager()
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=200,debug=True)
+
+
+
+
+
+
+
+
+'''
+
+Response of Student
+{
+  testID: '69',
+  studentEmail: 'HelloWorld@google.com',
+  qna: [
+    { ind: 1, studentAnswer: '4', actualAnswer: '4' },
+    {
+      ind: 2,
+      studentAnswer: 'jaf;ioejosdc ijdo oajsodjao',
+      actualAnswer: 'This is a sbjective question'
+    }
+  ]
+}
+{
+  id: '69',
+  questions: [
+    {
+      answer: '4',
+      ind: 1,
+      op1: 'sky',
+      op2: 'cloud',
+      op3: 'ceiling',
+      op4: 'Oracle cloud',
+      question: 'What is up'
+    },
+    { ind: 2, question: 'What is the best' }
+  ],
+  testDuration: '69',
+  warningThreshold: '6'
+}
+#####
+
+{
+    "response" : {
+        "testID" : 2,
+        "studentEmail" : "hdg@oracle.com",
+        "student_id": 100,
+        "qna" : [
+            {
+                "ind": 1,
+                "studentAnswer": "parht wafdgfgcfbjbocnbkcjnbgk",
+                "actualAnswer": "This is a sbjective question"
+            },
+            { 
+                "ind": 2, 
+                "studentAnswer": "4", 
+                "actualAnswer": "4" 
+            },
+            { 
+                "ind": 2, 
+                "studentAnswer": "4", 
+                "actualAnswer": "4" 
+            },
+            { 
+                "ind": 2, 
+                "studentAnswer": "hekko", 
+                "actualAnswer": "hekko" 
+            }
+        ]
+        
+    }
+}
+'''
+
+
