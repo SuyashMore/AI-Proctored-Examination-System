@@ -159,8 +159,15 @@ router.post("/showAllTests", (req, res) => {
 router.post("/takeTest", (req, res) => {
   console.log("Avail Tests")
   console.log(tests)
-
-  let test = tests[0].test_details;
+  let testID = req.body.testID;
+  let test = {};
+  for(let i=0;i<tests.length;i++){
+    if(tests[i].test_details.id === testID){
+      test = tests[i].test_details;
+      break;
+    }
+  }
+  // let test = tests[ind].test_details;
 
   // console.log("Test ID Requested:");
   // console.log(req.body.testID);
@@ -173,7 +180,7 @@ router.post("/takeTest", (req, res) => {
   // console.log("All Tests:")
   // console.log(tests)
   // console.log("Test is:")
-  // console.log(test)
+  console.log(test)
   console.log(JSON.stringify(test));
   res.render("takeTestByStudent", {
     test,

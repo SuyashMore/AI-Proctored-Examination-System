@@ -10,8 +10,11 @@
     <h3>Test ID: <%= testIDfromNode %></h3>
     <div id="selector">
       <h3>Select type of question</h3>
-      <button style="display: inline-block" id="mcq">MCQ</button>
-      <button style="display: inline-block" id="subjective">Subjective</button>
+      <br>
+      <button class="btn btn-primary" style="display: inline-block" id="mcq">MCQ</button>
+      <button class="btn btn-primary" style="display: inline-block" id="subjective">Subjective</button>
+      <br>
+      <br>
       <div id="enterquestion"></div>
 
       <form
@@ -28,6 +31,7 @@
           id="testID1"
         />
         <input
+        class="form-control"
           required
           type="text"
           placeholder="Enter Question"
@@ -36,8 +40,8 @@
           size="80"
         />
         <br />
-        <br />
         <input
+        class="form-control"
           required
           type="text"
           placeholder="option 1"
@@ -45,7 +49,9 @@
           id="op1"
           size="50"
         />
+        <br>
         <input
+        class="form-control"
           required
           type="text"
           placeholder="option 2"
@@ -54,8 +60,8 @@
           size="50"
         />
         <br />
-        <br />
         <input
+        class="form-control"
           required
           type="text"
           placeholder="option 3"
@@ -63,7 +69,9 @@
           id="op3"
           size="50"
         />
+        <br>
         <input
+        class="form-control"
           required
           type="text"
           placeholder="option 4"
@@ -72,8 +80,8 @@
           size="50"
         />
         <br />
-        <br />
         <input
+        class="form-control"
           required
           type="number"
           placeholder="Enter correct option no."
@@ -81,13 +89,15 @@
           id="answer"
         />
         <br />
-        <br />
         <input
+          class="btn btn-primary"
           type="submit"
           value="Submit Question"
           name="Submit Question"
           id="submitmcq"
         />
+        <br>
+        <br>
       </form>
 
       <form
@@ -97,6 +107,7 @@
         method="POST"
       >
         <input
+        class="form-control"
           type="text"
           name="question"
           size="80"
@@ -110,12 +121,16 @@
           name="testID"
           id="testID2"
         />
+        <br>
         <input
+        class="btn btn-primary"
           type="submit"
           value="Submit Question"
           name="Submit Question"
           id="submitsub"
         />
+        <br>
+        <br>
       </form>
 
       <form action="/teacher/showTestAfterCreation" method="POST">
@@ -126,13 +141,13 @@
           id=""
           style="display: none"
         />
-        <button id="submittest">Submit Test</button>
+        <button class="btn btn-primary" id="submittest">Submit Test</button>
       </form>
     </div>
 
     <div id="arrayToNode"></div>
 
-    <button id="displayquesbtn">display questions</button>
+    <!-- <button id="displayquesbtn">display questions</button> -->
     <!-- <div id="submitmcq">dfdf</div> -->
     <div id="displayques"></div>
     <script>

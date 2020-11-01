@@ -6,22 +6,30 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Test ID: <%= test.id %></h1>
-    <% test.questions.forEach(function(question){ %> <% if(question.op1 ===
-    undefined){ %>
-    <h4>Question:</h4>
-    <h4><%= question.question %></h4>
-    <hr />
-    <% } else { %>
-    <h4>Question:</h4>
-    <h4><%= question.question %></h4>
-    <h5><%= question.op1 %></h5>
-    <h5><%= question.op2 %></h5>
-    <h5><%= question.op3 %></h5>
-    <h5><%= question.op4 %></h5>
-    <h5>Answer:</h5>
-    <h5><%= question.answer %></h5>
-    <hr />
-    <% } %> <% }) %>
+    <div style="padding: 15px; margin: 20px;">
+      <h1>Test ID: <%= test.id %></h1>
+      <% test.questions.forEach(function(question){ %> <% if(question.op1 ===
+      undefined){ %>
+        <div class="card" style="padding: 15px; margin: 20px;">
+      <h4>Question:</h4>
+      <h4><%= question.question %></h4>
+      <!-- <hr /> -->
+      </div>
+      <br>
+      <% } else { %>
+        <div class="card" style="padding: 15px; margin: 20px;">
+      <h4>Question:</h4>
+      <h4><%= question.question %></h4>
+      <h5><%= question.op1 %></h5>
+      <h5><%= question.op2 %></h5>
+      <h5><%= question.op3 %></h5>
+      <h5><%= question.op4 %></h5>
+      <h5>Answer:</h5>
+      <h5><%= question.answer %></h5>
+      <!-- <hr /> -->
+      </div>
+      <br>
+      <% } %> <% }) %>
+    </div>
   </body>
 </html>

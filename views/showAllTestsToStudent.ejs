@@ -7,15 +7,15 @@
   </head>
   <body>
     <h1>All Tests:</h1>
-    <% tests.forEach(function(test){ %>
+    <% for(let i=0 ; i < tests.length ; i++){ %>
     <form action="/student/takeTest" method="POST">
-      <%= test.id %>
+      <%= tests[i].test_details.id %>
       <br />
       <input
         type="text"
         style="display: none"
         name="testID"
-        value="<%= test.id %>"
+        value="<%= tests[i].test_details.id %>"
         id=""
       />
       <input
@@ -25,8 +25,8 @@
         value="<%= email %>"
         id=""
       />
-      <input type="submit" value="Take Test" name="" id="" />
+      <input class="btn btn-primary" type="submit" value="Take Test" name="" id="" />
     </form>
-    <% }) %>
+    <% } %>
   </body>
 </html>

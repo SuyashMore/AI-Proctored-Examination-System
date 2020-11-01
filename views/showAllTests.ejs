@@ -6,20 +6,29 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>All Tests:</h1>
+    <h1 style="margin: auto; text-align: center;">All Tests:</h1>
+    <hr>
     <% tests.forEach(function(test){ %>
-    <form action="/teacher/showTestAfterCreation" method="POST">
-      <%= test.id %>
-      <br />
-      <input
-        type="text"
-        style="display: none"
-        name="testID"
-        value="<%= test.id %>"
-        id=""
-      />
-      <input type="submit" value="Show Test" name="" id="" />
-    </form>
+      <div class="card" style="padding: 20px; width: 30rem; margin: auto;">
+        <div class="card-text">
+          <form action="/teacher/showTestAfterCreation" method="POST">
+            <div style="text-align: center;">
+              Test ID: 
+              <%= test.id %>
+              <br />
+              <input
+                type="text"
+                style="display: none"
+                name="testID"
+                value="<%= test.id %>"
+                id=""
+              />
+            </div>
+            <input style="margin-left: 170px;" class="btn btn-primary" type="submit" value="Show Test" name="" id="" />
+          </form>
+        </div>
+      </div>
+      <br>
     <% }) %>
   </body>
 </html>
