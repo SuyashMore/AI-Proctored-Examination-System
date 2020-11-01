@@ -145,9 +145,10 @@ router.post("/showAllTests", (req, res) => {
       tests = body;
       console.log("Tests Before!:")
       console.log(tests)
+      console.log(req.body)
       res.render("showAllTestsToStudent", {
         tests,
-        email: "test@test.com"
+        email: req.body.email
       });
   });
 
@@ -252,6 +253,37 @@ request.post(options, (err, resp, body) => {
 });
 
 
+})
+
+router.get('/GetResultByEmail', (req, res) => {
+  res.render('getResultOfStudent');
+})
+
+router.post('/GetResultByEmail', (req, res) => {
+
+  console.log("email Q:");
+  console.log(req.body.email)
+  const options = {
+    url: 'http://127.0.0.1:200/' + 'getStudentResult',
+    json: true,
+    body: {
+        "studentEmail" : req.body.email,
+    }
+};
+
+request.post(options, (err, resp, body) => {
+    if (err) {
+        return console.log(err);
+    }
+    console.log("Body!:")
+    console.log(body);
+    
+    res.render('showResultUsingEmail',{
+        results:body.result
+    })  
+});
+
+  
 })
 
 module.exports = router;

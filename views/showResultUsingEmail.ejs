@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="card" style="padding-left: 30px; font-size: 30px;">
+        <% for(let i = 0 ; i < results.length ; i++){ %>
+            Test ID:
+            <%= results[i].test_id %>
+            <br>
+            Scores:
+            <br>
+            Final Score:
+            <%= results[i].final_score %>
+            <br>
+            MCQ Score:
+            <%= results[i].mcq_score %>
+            <br>
+            Subjective Score:
+            <%= results[i].subjective_score %>
+            <br>
+            <br>
+            <hr>
+        <% } %>
+    </div>
+</body>
+</html>
