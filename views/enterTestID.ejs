@@ -6,7 +6,29 @@
     <title>Document</title>
   </head>
   <body>
+
     <form action="/teacher/takeTestID" method="POST">
+    <div class="form-group">
+      <label for="testID">Enter Test ID:</label>
+      <input name="testID" type="text" class="form-control" id="testID" aria-describedby="emailHelp" placeholder="Enter Test ID">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputStartTime1">Enter Start Time:</label>
+      <input name="startTime" type="number" class="form-control" id="exampleInputStartTime1" placeholder="Enter Start Time">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputDuration1">Enter Test Duration:</label>
+      <input name="testDuration" type="number" class="form-control" id="exampleInputDuration1" placeholder="Enter Test Duration In Minutes">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputThreshold1">Enter Warning Threshold:</label>
+      <input name="warningThreshold" type="number" class="form-control" id="exampleInputThreshold1" placeholder="Enter warning threshold">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <!-- <form action="/teacher/takeTestID" method="POST">
       Enter Test ID:
       <input
       style="width: 50%;"
@@ -30,6 +52,6 @@
       <br>
       <br>
       <input type="submit" name="submit" />
-    </form>
+    </form> -->
   </body>
 </html>

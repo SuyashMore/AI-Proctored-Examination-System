@@ -7,7 +7,29 @@
   </head>
   <body>
     <h2>Student Register</h2>
-    <form action="/student/register" method="POST">
+
+    <form action="/student/login" method="POST">
+    <div class="form-group">
+      <label for="exampleInputName1">Name</label>
+      <input name="name" type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Your Name">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Upload ur current photo:</label>
+      <input name="photo" type="file" class="form-control" id="photo">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter password">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <!-- <form action="/student/register" method="POST">
       Enter ur Name:
       <input type="text" name="name" />
       <br>
@@ -27,6 +49,6 @@
       <input type="submit" />
       <br>
       <br>
-    </form>
+    </form> -->
   </body>
 </html>
