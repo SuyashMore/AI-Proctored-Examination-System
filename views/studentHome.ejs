@@ -7,10 +7,11 @@
   </head>
   <body>
     <div class="container">
-      <a href="/student/GetResultByEmail">Show Result</a>
+      <a class="btn btn-primary" href="/student/GetResultByEmail">Show Result</a>
       <form action="/student/showAllTests" method="POST">
         <input type="text" name="email" style="display: none;" value="<%= email %>" id="">
-        <input type="submit" value="Show All Tests" name="" id="">
+        <br>
+        <input class="btn btn-primary" type="submit" value="Show All Tests" name="" id="">
       </form>
     </div>
   </body>

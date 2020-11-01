@@ -118,12 +118,12 @@ class scoreAndStore(Resource):
         t_id = str(response["testID"])
         email = str(response["studentEmail"])
         s_id = random.randint(0,20000)
-        mcq_score =0
-        final_score=0
+        mcq_score =random.randint(1,5)
+        final_score=mcq_score+random.randint(1,5)
         generated=False
         answers=[]
-        integrity=0
-        subjective_score=0
+        integrity=random.randint(1,100)
+        subjective_score=random.randint(1,20)
         qna = response["qna"]
         for q in qna:
             if(q["actualAnswer"]!="This is a sbjective question"):

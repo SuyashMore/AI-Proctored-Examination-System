@@ -14,20 +14,17 @@
       <input type="text" name="testID" value="<%= test.id %>" id="testID" style="display: none;">
       <% for(var i=0 ; i < test.questions.length ; i++ ){ %>
       <% if(test.questions[i].op1 === undefined){ %>
-      <div class="card" style="width: 18rem;">
       <h3>Question: <%= test.questions[i].question %></h3>
-      <textarea class="control-form" placeholder="Type ur answer here" name="<%= test.questions[i].ind %>" cols="150" rows="10"></textarea>
-      </div>
+      <textarea placeholder="Type ur answer here" name="<%= test.questions[i].ind %>" cols="150" rows="10"></textarea>
       <% } else { %>
-      <div class="card" style="width: 60rem;"></div>
       <h3>Question: <%= test.questions[i].question %></h3>
       <h4>1. <%= test.questions[i].op1 %></h4>
       <h4>2. <%= test.questions[i].op2 %></h4>
       <h4>3. <%= test.questions[i].op3 %></h4>
       <h4>4. <%= test.questions[i].op4 %></h4>
       <input class="control-form" placeholder="Choose correct Option No." type="number" name="<%= test.questions[i].ind %>">
-      </div>
-      <% } %> 
+      <% } %>
+      <hr> 
       <% } %>
       <input type="submit" name="submit" value="End Test" id="endTestId">
   </form>
