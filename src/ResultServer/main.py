@@ -117,6 +117,7 @@ class scoreAndStore(Resource):
         print(type(response))
         t_id = str(response["testID"])
         email = str(response["studentEmail"])
+        print(f"Response:{response}")
         s_id = random.randint(0,20000)
         mcq_score =random.randint(1,5)
         final_score=mcq_score+random.randint(1,5)
@@ -125,15 +126,22 @@ class scoreAndStore(Resource):
         integrity=random.randint(1,100)
         subjective_score=random.randint(1,20)
         qna = response["qna"]
+        print("=======================================")
         for q in qna:
+            print(f"q:{q}")
+            print(f"qActual:{q['actualAnswer']}")
+            print(f"qStudent:{q['studentAnswer']}")
+
+
             if(q["actualAnswer"]!="This is a sbjective question"):
                 if(q["actualAnswer"]==q["studentAnswer"]):
                     mcq_score = mcq_score +1
             answers.append(q["studentAnswer"])
-        print(qna)
-        print(type(qna))
-        print(mcq_score)
-        print(answers)
+        print("================================================")
+        # print(qna)
+        # print(type(qna))
+        # print(mcq_score)
+        # print(answers)
         
         jsondata = {
                 'student_id': s_id,

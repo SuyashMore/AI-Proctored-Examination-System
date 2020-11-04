@@ -1,0 +1,7 @@
+Sat Oct 31 14:46:04 2020[ERROR]Client execution RuntimeError: PUT: Illegal Argument: Missing primary key field: student_id
+Sat Oct 31 17:56:06 2020[ERROR]Client execution RuntimeError: QUERY: Illegal Argument: Table, index and unquoted field names may contain only alphanumeric values plus the character "_". Error: at (1, 53) mismatched input '.21' expecting {<EOF>, AND, GROUP, IS, LIMIT, OFFSET, OR, ORDER, '[', '*', '.', '+', '-', '/', RDIV}, at line 1:53
+rule stack: [parse]
+Sat Oct 31 17:57:09 2020[ERROR]Client execution RuntimeError: QUERY: Illegal Argument: Table, index and unquoted field names may contain only alphanumeric values plus the character "_". Error: at (1, 53) mismatched input '.21' expecting {<EOF>, AND, GROUP, IS, LIMIT, OFFSET, OR, ORDER, '[', '*', '.', '+', '-', '/', RDIV}, at line 1:53
+rule stack: [parse]
+Sat Oct 31 17:57:26 2020[ERROR]Client execution RuntimeError: QUERY: Illegal Argument: Table, index and unquoted field names may contain only alphanumeric values plus the character "_". Error: at (1, 53) mismatched input '.21' expecting {<EOF>, AND, GROUP, IS, LIMIT, OFFSET, OR, ORDER, '[', '*', '.', '+', '-', '/', RDIV}, at line 1:53
+rule stack: [parse]

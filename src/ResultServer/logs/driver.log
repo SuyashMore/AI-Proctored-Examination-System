@@ -1,0 +1,14 @@
+Sun Nov  1 04:35:32 2020[ERROR]Client execution RuntimeError: QUERY: Illegal Argument: Table, index and unquoted field names may contain only alphanumeric values plus the character "_". Error: at (1, 36) mismatched input '@' expecting {<EOF>, AND, GROUP, IS, LIMIT, OFFSET, OR, ORDER, '[', '*', '.', '+', '-', '/', RDIV}, at line 1:36
+rule stack: [parse]
+Sun Nov  1 04:35:32 2020[ERROR]Client execution RuntimeError: QUERY: Illegal Argument: Table, index and unquoted field names may contain only alphanumeric values plus the character "_". Error: at (1, 36) mismatched input '@' expecting {<EOF>, AND, GROUP, IS, LIMIT, OFFSET, OR, ORDER, '[', '*', '.', '+', '-', '/', RDIV}, at line 1:36
+rule stack: [parse]
+Sun Nov  1 04:35:32 2020[ERROR]Client execution RuntimeError: QUERY: Illegal Argument: Table, index and unquoted field names may contain only alphanumeric values plus the character "_". Error: at (1, 36) mismatched input '@' expecting {<EOF>, AND, GROUP, IS, LIMIT, OFFSET, OR, ORDER, '[', '*', '.', '+', '-', '/', RDIV}, at line 1:36
+rule stack: [parse]
+Sun Nov  1 04:41:26 2020[ERROR]Client execution RuntimeError: QUERY: Illegal Argument: Table, index and unquoted field names may contain only alphanumeric values plus the character "_". Error: at (1, 50) mismatched input '@' expecting {<EOF>, AND, GROUP, IS, LIMIT, OFFSET, OR, ORDER, '[', '*', '.', '+', '-', '/', RDIV}, at line 1:50
+rule stack: [parse]
+Sun Nov  1 04:41:26 2020[ERROR]Client execution RuntimeError: QUERY: Illegal Argument: Table, index and unquoted field names may contain only alphanumeric values plus the character "_". Error: at (1, 50) mismatched input '@' expecting {<EOF>, AND, GROUP, IS, LIMIT, OFFSET, OR, ORDER, '[', '*', '.', '+', '-', '/', RDIV}, at line 1:50
+rule stack: [parse]
+Sun Nov  1 04:41:26 2020[ERROR]Client execution RuntimeError: QUERY: Illegal Argument: Table, index and unquoted field names may contain only alphanumeric values plus the character "_". Error: at (1, 50) mismatched input '@' expecting {<EOF>, AND, GROUP, IS, LIMIT, OFFSET, OR, ORDER, '[', '*', '.', '+', '-', '/', RDIV}, at line 1:50
+rule stack: [parse]
+Sun Nov  1 04:41:26 2020[ERROR]Client execution RuntimeError: QUERY: Illegal Argument: Table, index and unquoted field names may contain only alphanumeric values plus the character "_". Error: at (1, 50) mismatched input '@' expecting {<EOF>, AND, GROUP, IS, LIMIT, OFFSET, OR, ORDER, '[', '*', '.', '+', '-', '/', RDIV}, at line 1:50
+rule stack: [parse]
